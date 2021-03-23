@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import {
   View,
   Image,
@@ -12,15 +12,24 @@ import {
 } from "react-native";
 import styles from "./styles";
 import { textos } from "../../constants";
+import axios from 'axios';
+import AuthContext from '../../context/AuthContext';
 
 const Login = ({ navigation }) => {
-  const [email, setEmail] = useState("xrodrigoresendex@gmail.com");
+ const url = 'http://localhost:3005';
+
+  const [email, setEmail] = useState("rodrigopassageiro@gmail.com");
   const [password, setPassword] = useState("123456");
+  const auth = useContext(AuthContext);
+  console.log(auth);
 
   async function handleLogin() {
-    email == "" || password == ""
-      ? Alert.alert("Insira os dados e tente novamente")
-      : navigation.navigate("Bottom");
+   const response  = await axios.post(url+'/passageiro/login',{
+     email,
+     password
+   });
+   console.log(response);
+
   }
 
   return (

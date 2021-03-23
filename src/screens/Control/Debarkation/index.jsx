@@ -10,7 +10,6 @@ const Debarkation = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <Header />
 
       <View style={styles.viewSlider}>
         <Text style={styles.numberText}>{number}%</Text>

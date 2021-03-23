@@ -11,7 +11,7 @@ import ItemRender from '../../renderItem';
 
 
 const Embark = ({ navigation, route }) => {
- const url = 'http://192.168.0.101:3005';
+ const url = 'http://localhost:3005';
  const dadosViagem = route.params;
 
   const [number, setNumber] = useState(100);
@@ -35,7 +35,7 @@ const Embark = ({ navigation, route }) => {
     <View style={styles.container}>
 
       <View style={styles.infoView}>
-        <Text style={styles.infoText}>{item.nome}</Text>
+        <Text style={styles.infoText}>{item.name}</Text>
         <Text style={styles.infoText}>R$20,00</Text>
       </View>
 
@@ -54,7 +54,7 @@ const Embark = ({ navigation, route }) => {
         />
       </View>
       {data.map((item)=>(
-        <ItemRender item={item}/>
+        <ItemRender item={item} navigation={navigation}/>
        ))}
 
 <TouchableOpacity

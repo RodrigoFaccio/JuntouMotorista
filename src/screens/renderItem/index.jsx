@@ -9,7 +9,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 
 
-const ItemRender = ({ item}) => {
+const ItemRender = ({ item,navigation}) => {
  const [checked,setChecked] = useState(item.checked=="true"?true:false);
 
   return (
@@ -18,7 +18,7 @@ const ItemRender = ({ item}) => {
 <TouchableOpacity onPress={() => navigation.navigate("Debarkation")}>
           <View style={styles.cardView}>
             <Text style={styles.cardText} numberOfLines={1}>
-              Praça da estação - Honório Bicalho
+              {item.name_embark}
             </Text>
             <View
               style={{
@@ -31,7 +31,7 @@ const ItemRender = ({ item}) => {
                 <View>
                   <View>
                     <CheckBox
-                      title={item.nome}
+                      title={item.name}
                       checked={!checked}
                       onPress={() => setChecked(!checked)}
                       checkedColor={color.button}

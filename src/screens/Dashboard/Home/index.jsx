@@ -14,7 +14,7 @@ import axios from 'axios';
 
 const Home = ({ navigation }) => {
  const [data,setData] = useState({});
- const url = 'http://192.168.0.101:3005';
+ const url = 'http://localhost:3005';
  useFocusEffect(
   React.useCallback(() => {
     async function viagens(){
@@ -36,10 +36,10 @@ const Home = ({ navigation }) => {
       <TouchableOpacity onPress={() => navigation.navigate("Embark", item)}>
         <View style={styles.cardView}>
           <Text style={styles.cardText} numberOfLines={1}>
-            {item.nome}
+            {item.name}
           </Text>
           <Text style={styles.cardText} numberOfLines={2}>
-            {item.end}
+            {item.time}
           </Text>
         </View>
         <View style={{height:5}}/>
