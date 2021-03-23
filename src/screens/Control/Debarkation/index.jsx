@@ -1,12 +1,34 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import { useFocusEffect } from '@react-navigation/native';
+
 import styles from "./styles";
 import { Feather } from "@expo/vector-icons";
 import Slider from "@react-native-community/slider";
 import { textos, color } from "../../../constants";
+import axios from 'axios';
 
 const Debarkation = ({ navigation, route }) => {
+ const url = 'http://localhost:3005';
+ const dadosViagem = route.params;
+//  console.log(dadosViagem);
+
+
   const [number, setNumber] = useState(100);
+
+  const [data,setData] = useState([]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      async function viagens(){
+        const response = await axios.get(url+`/viagens/motoristas/${dadosViagem.id_trip}/lista`);
+        setData(response.data);
+         console.log(data);
+      }
+      viagens();
+  
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
@@ -29,39 +51,46 @@ const Debarkation = ({ navigation, route }) => {
       </View>
 
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate("Finalization")}>
-          <View style={styles.cardView}>
-            <Text style={styles.cardText} numberOfLines={1}>
-              Praça do Mineiro - Centro
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <View>
-                <View>
-                  <View>
-                    <Text style={styles.cardText} numberOfLines={2}>
-                      Gabriel Luciano Silva - R$5,00
-                    </Text>
-                  </View>
-                  
-                </View>
-              </View>
-              <View>
-                <Feather
-                  name="arrow-right"
-                  color={color.button}
-                  size={25}
-                  style={{ marginRight: 15 }}
-                />
-              </View>
-            </View>
-          </View>
-        </TouchableOpacity>
+        {}
+
+        {data.map((item)=>(
+         <TouchableOpacity onPress={() => navigation.navigate("Finalization",item)}>
+         <View style={styles.cardView}>
+           <Text style={styles.cardText} numberOfLines={1}>
+             {item.name_embark}
+           </Text>
+           <View
+             style={{
+               flexDirection: "row",
+               alignItems: "center",
+               justifyContent: "space-between",
+             }}
+           >
+             <View>
+               <View>
+                 <View>
+                   <Text style={styles.cardText} numberOfLines={2}>
+                     {item.name} - R$5,00
+                   </Text>
+                 </View>
+                 
+               </View>
+             </View>
+             <View>
+               <Feather
+                 name="arrow-right"
+                 color={color.button}
+                 size={25}
+                 style={{ marginRight: 15 }}
+               />
+             </View>
+           </View>
+         </View>
+       </TouchableOpacity>
+       ))}
+
+
+       
 
         
 

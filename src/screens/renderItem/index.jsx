@@ -15,7 +15,7 @@ const ItemRender = ({ item,navigation}) => {
   return (
     
       
-<TouchableOpacity onPress={() => navigation.navigate("Disembark")}>
+<TouchableOpacity onPress={() => navigation.navigate("Disembark",item)}>
           <View style={styles.cardView}>
             <Text style={styles.cardText} numberOfLines={1}>
               {item.name_embark}
