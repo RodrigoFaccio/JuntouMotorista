@@ -48,11 +48,7 @@ const Debarkation = ({ navigation, route }) => {
                       Gabriel Luciano Silva - R$5,00
                     </Text>
                   </View>
-                  <View>
-                    <Text style={styles.cardText} numberOfLines={2}>
-                      Fernanda de assis pereira - R$5,00
-                    </Text>
-                  </View>
+                  
                 </View>
               </View>
               <View>
@@ -67,71 +63,7 @@ const Debarkation = ({ navigation, route }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Finalization")}>
-          <View style={styles.cardView}>
-            <Text style={styles.cardText} numberOfLines={1}>
-              Praça da Preta - Centro
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <View>
-                <View>
-                  <View>
-                    <Text style={styles.cardText} numberOfLines={2}>
-                      Gabriel Luciano Silva - R$5,00
-                    </Text>
-                  </View>
-                </View>
-              </View>
-              <View>
-                <Feather
-                  name="arrow-right"
-                  color={color.button}
-                  size={25}
-                  style={{ marginRight: 15 }}
-                />
-              </View>
-            </View>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => navigation.navigate("Finalization")}>
-          <View style={styles.cardView}>
-            <Text style={styles.cardText} numberOfLines={1}>
-              Praça da Garra - Centro
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <View>
-                <View>
-                  <View>
-                    <Text style={styles.cardText} numberOfLines={2}>
-                      Gabriel Luciano Silva - R$5,00
-                    </Text>
-                  </View>
-                </View>
-              </View>
-              <View>
-                <Feather
-                  name="arrow-right"
-                  color={color.button}
-                  size={25}
-                  style={{ marginRight: 15 }}
-                />
-              </View>
-            </View>
-          </View>
-        </TouchableOpacity>
+        
 
         <TouchableOpacity style={styles.button} onPress={() => {}}>
           <Text style={styles.TextButton}>{textos.finalizar}</Text>

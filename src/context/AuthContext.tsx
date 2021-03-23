@@ -1,4 +1,5 @@
-import React,{createContext, useCallback, useContext, useState} from 'react';
+import React,{createContext, useCallback, useContext, useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 interface SignCredentials{
@@ -8,7 +9,6 @@ interface SignCredentials{
 interface AuthState{
     email:string,
     token:string,
-    id:number
 }
 interface AuthContextData{
     user:object,
@@ -17,23 +17,31 @@ interface AuthContextData{
  const AuthContext = createContext<AuthContextData>({}as AuthContextData);
 
  const AuthProvider : React.FC = ({children})=>{
-    const [data,setData] = useState<AuthState>(()=>{
-        const token = localStorage.getItem('@juntouApp:token');
-        const email = localStorage.getItem('@juntouApp:email');
-        const id = localStorage.getItem('@juntouApp:id');
-        if(token && email && id){
-            return{token,email,id} ;
+    const [data,setData] = useState<AuthState>( {} as AuthState);
+    useEffect(()=>{
+        async function loadStorageData():Promise<void>{
+            const token = await AsyncStorage.getItem('@juntouApp:token');
+            const email =await AsyncStorage.getItem('@juntouApp:email');
+            const id = await AsyncStorage.getItem('@juntouApp:id');
+            if(token && email && id){
+                setData({
+                    token,
+                    email,
+                })
+            }
         }
-        return {} as AuthState;
-    });
-
-    const signIn = useCallback(({email,token,id})=>{
         
-        localStorage.setItem('@juntouApp:token',token);
-        localStorage.setItem('@juntouApp:email',email);
-        localStorage.setItem('@juntouApp:id',id);
+        
+        loadStorageData();
+    },[]);
 
-        setData({email,token,id});
+    const signIn = useCallback(async({email,token})=>{
+        
+       await AsyncStorage.multiSet([
+           ['@juntouApp:token',token],
+           ['@juntouApp',email],
+       ]);
+       setData({email,token})
 
 
     },[])

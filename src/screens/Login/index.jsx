@@ -20,9 +20,11 @@ const Login = ({ navigation }) => {
 
   const [email, setEmail] = useState("rodrigopassageiro@gmail.com");
   const [password, setPassword] = useState("123456");
-  const {signIn,user} = useAuth()
-
+  const {signIn,user} = useAuth();
   console.log(user);
+
+
+  
 
   async function handleLogin() {
    const response  = await axios.post(url+'/passageiro/login',{

@@ -1,3 +1,4 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -5,8 +6,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
-import {AuthContext,AuthProvider} from './src/context/AuthContext';
-
+import AppProvider from './src/context';
+import Routes from './src/routes'
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
@@ -15,12 +16,13 @@ export default function App() {
     return null;
   } else {
     return (
+      <NavigationContainer>
       <SafeAreaProvider>
-        <AuthProvider>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
-        </AuthProvider>
+        <AppProvider>
+          <Routes/>
+        </AppProvider>
       </SafeAreaProvider>
+      </NavigationContainer>
     );
   }
 }
