@@ -10,8 +10,9 @@ import axios from 'axios';
 
 const Debarkation = ({ navigation, route }) => {
  const url = 'http://localhost:3005';
+ const [id,setId] = useState();
  const dadosViagem = route.params;
-//  console.log(dadosViagem);
+ console.log(dadosViagem.id);
 
 
   const [number, setNumber] = useState(100);
@@ -21,7 +22,7 @@ const Debarkation = ({ navigation, route }) => {
   useFocusEffect(
     React.useCallback(() => {
       async function viagens(){
-        const response = await axios.get(url+`/viagens/motoristas/${dadosViagem.id_trip}/lista`);
+        const response = await axios.get(url+`/viagens/motoristas/${id}/lista`);
         setData(response.data);
          console.log(data);
       }
@@ -94,7 +95,7 @@ const Debarkation = ({ navigation, route }) => {
 
         
 
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate("Finalization",dadosViagem)}}>
           <Text style={styles.TextButton}>{textos.finalizar}</Text>
         </TouchableOpacity>
       </View>

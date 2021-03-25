@@ -15,7 +15,7 @@ export const textos = {
   desembarque: "Desembarque",
   gps: "gps",
   finalizar: "Finalizar",
-  parabens: "Parabéns",
+  parabéns: "Parabéns",
   corrida: "Corrida finalizada com sucesso!",
   fazermais:"Fazer mais corridas",
   finance:"Financeiro",

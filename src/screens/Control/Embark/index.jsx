@@ -14,6 +14,7 @@ const Embark = ({ navigation, route }) => {
  const url = 'http://localhost:3005';
  const dadosViagem = route.params;
 
+
   const [number, setNumber] = useState(100);
   const [checked, setChecked] = useState(true);
   const [data,setData] = useState([]);
@@ -29,13 +30,12 @@ const Embark = ({ navigation, route }) => {
     }, [])
   );
 
-  const item = route.params;
 
   return (
     <View style={styles.container}>
 
       <View style={styles.infoView}>
-        <Text style={styles.infoText}>{item.name}</Text>
+        <Text style={styles.infoText}>{dadosViagem.name}</Text>
         <Text style={styles.infoText}>R$20,00</Text>
       </View>
 
@@ -59,7 +59,7 @@ const Embark = ({ navigation, route }) => {
 
 <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Debarkation")}
+          onPress={() =>navigation.navigate("Disembark",dadosViagem)}
         >
           <Text style={styles.TextButton}>{textos.desembarque}</Text>
         </TouchableOpacity>

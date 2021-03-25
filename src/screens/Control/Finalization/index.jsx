@@ -13,7 +13,7 @@ const Finalization = ({ navigation,route }) => {
   useFocusEffect(
     React.useCallback(() => {
       async function finalization(){
-        const response = await axios.get(url+`/viagens/${dadosViagem.id_trip}/finalization`);
+        const response = await axios.get(url+`/viagens/${dadosViagem.id}/finalization`);
         
       }
       finalization();
@@ -23,12 +23,12 @@ const Finalization = ({ navigation,route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.viewText}>
-        <Text style={styles.parabensText}>{textos.parabens}</Text>
+        <Text style={styles.parabensText}>{textos.parabéns}</Text>
         <Text style={styles.descText}>{textos.corrida}</Text>
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.replace("Bottom")}
+          onPress={() => navigation.navigate("Home")}
         >
           <Text style={styles.TextButton}>{textos.fazermais}</Text>
         </TouchableOpacity>
