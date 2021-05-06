@@ -7,9 +7,13 @@ import { Feather } from "@expo/vector-icons";
 import Slider from "@react-native-community/slider";
 import { textos, color } from "../../../constants";
 import axios from 'axios';
+import { ScrollView } from "react-native-gesture-handler";
 
 const Debarkation = ({ navigation, route }) => {
- const url = 'http://localhost:3005';
+  const url = 'http://192.168.1.106:3005';
+ const [infosTrip,setInfoTrip] = useState();
+
+
  const [id,setId] = useState();
  const dadosViagem = route.params;
  console.log(dadosViagem.id);
@@ -22,14 +26,21 @@ const Debarkation = ({ navigation, route }) => {
   useFocusEffect(
     React.useCallback(() => {
       async function viagens(){
-        const response = await axios.get(url+`/viagens/motoristas/${id}/lista`);
-        setData(response.data);
+        const {data} = await axios.get(url+`/trip/${dadosViagem.id}/listPassenger`);
+        
+        setData(data);
          console.log(data);
       }
       viagens();
   
     }, [])
   );
+  async function infoTrip(item){
+    const {data} = await axios.get(url+`/trip/${item}/listInfosTrip`);
+    console.log(data);
+   setInfoTrip(data);
+  }
+  infoTrip(dadosViagem.id);
 
   return (
     <View style={styles.container}>
@@ -50,15 +61,16 @@ const Debarkation = ({ navigation, route }) => {
 
         <Text style={styles.valorText}>R$20.00</Text>
       </View>
+      <ScrollView>
 
       <View>
-        {}
 
         {data.map((item)=>(
-         <TouchableOpacity onPress={() => navigation.navigate("Finalization",item)}>
+
+         <TouchableOpacity >
          <View style={styles.cardView}>
            <Text style={styles.cardText} numberOfLines={1}>
-             {item.name_embark}
+             {infosTrip}
            </Text>
            <View
              style={{
@@ -88,7 +100,10 @@ const Debarkation = ({ navigation, route }) => {
            </View>
          </View>
        </TouchableOpacity>
+
        ))}
+
+
 
 
        
@@ -98,7 +113,11 @@ const Debarkation = ({ navigation, route }) => {
         <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate("Finalization",dadosViagem)}}>
           <Text style={styles.TextButton}>{textos.finalizar}</Text>
         </TouchableOpacity>
+
       </View>
+      </ScrollView>
+
+
     </View>
   );
 };

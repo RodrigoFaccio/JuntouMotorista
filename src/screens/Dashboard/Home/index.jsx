@@ -14,11 +14,11 @@ import axios from 'axios';
 
 const Home = ({ navigation }) => {
  const [data,setData] = useState({});
- const url = 'http://localhost:3005';
+ const url = 'http://192.168.1.106:3005';
  useFocusEffect(
   React.useCallback(() => {
     async function viagens(){
-      const response = await axios.get(url+'/viagens/lista');
+      const response = await axios.get(url+'/trip/lista');
       setData(response.data);
       console.log(data);
     }

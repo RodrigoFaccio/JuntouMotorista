@@ -11,7 +11,7 @@ import ItemRender from '../../renderItem';
 
 
 const Embark = ({ navigation, route }) => {
- const url = 'http://localhost:3005';
+ const url = 'http://192.168.1.106:3005';
  const dadosViagem = route.params;
 
 
@@ -21,8 +21,8 @@ const Embark = ({ navigation, route }) => {
   useFocusEffect(
     React.useCallback(() => {
       async function viagens(){
-        const response = await axios.get(url+`/viagens/motoristas/${dadosViagem.id}/lista`);
-        setData(response.data);
+        const {data} = await axios.get(url+`/trip/${dadosViagem.id}/listPassenger`);
+        setData(data);
         console.log(data);
       }
       viagens();
@@ -53,10 +53,11 @@ const Embark = ({ navigation, route }) => {
           value={number}
         />
       </View>
+      <ScrollView>
       {data.map((item)=>(
-        <ItemRender item={item} navigation={navigation}/>
+        <ItemRender item={item}  navigation={navigation}/>
        ))}
-
+</ScrollView>
 <TouchableOpacity
           style={styles.button}
           onPress={() =>navigation.navigate("Disembark",dadosViagem)}

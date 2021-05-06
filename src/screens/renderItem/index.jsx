@@ -10,15 +10,24 @@ import axios from 'axios';
 
 
 const ItemRender = ({ item,navigation}) => {
+ const url = 'http://192.168.1.106:3005';
+ const [infosTrip,setInfoTrip] = useState();
+  
  const [checked,setChecked] = useState(item.checked=="true"?true:false);
+
+ async function infoTrip(item){
+    const {data} = await axios.get(url+`/trip/${item.id_trip}/listInfosTrip`);
+   setInfoTrip(data);
+  }
+  infoTrip(item);
 
   return (
     
       
-<TouchableOpacity onPress={() => navigation.navigate("Disembark",item)}>
+<TouchableOpacity >
           <View style={styles.cardView}>
             <Text style={styles.cardText} numberOfLines={1}>
-              {item.name_embark}
+              {infosTrip}
             </Text>
             <View
               style={{
@@ -28,7 +37,9 @@ const ItemRender = ({ item,navigation}) => {
               }}
             >
               <View>
+              
                 <View>
+                  
                   <View>
                     <CheckBox
                       title={item.name}

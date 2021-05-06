@@ -7,13 +7,15 @@ import axios from 'axios';
 
 
 const Finalization = ({ navigation,route }) => {
-  const url = 'http://localhost:3005';
+  const url = 'http://192.168.1.106:3005';
+
  const dadosViagem = route.params;
+ console.log(dadosViagem.id)
 
   useFocusEffect(
     React.useCallback(() => {
       async function finalization(){
-        const response = await axios.get(url+`/viagens/${dadosViagem.id}/finalization`);
+        const response = await axios.get(url+`/trip/${dadosViagem.id}/finalization`);
         
       }
       finalization();
