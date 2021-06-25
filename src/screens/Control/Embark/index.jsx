@@ -6,12 +6,11 @@ import { CheckBox } from "react-native-elements";
 import Slider from "@react-native-community/slider";
 import { textos, color } from "../../../constants";
 import { useFocusEffect } from '@react-navigation/native';
-import axios from 'axios';
 import ItemRender from '../../renderItem';
+import api from "../../../api";
 
 
 const Embark = ({ navigation, route }) => {
- const url = 'http://192.168.1.106:3005';
  const dadosViagem = route.params;
 
 
@@ -21,7 +20,7 @@ const Embark = ({ navigation, route }) => {
   useFocusEffect(
     React.useCallback(() => {
       async function viagens(){
-        const {data} = await axios.get(url+`/trip/${dadosViagem.id}/listPassenger`);
+        const {data} = await api.get(`/trip/${dadosViagem.id}/listPassenger`);
         setData(data);
         console.log(data);
       }
@@ -55,7 +54,7 @@ const Embark = ({ navigation, route }) => {
       </View>
       <ScrollView>
       {data.map((item)=>(
-        <ItemRender item={item}  navigation={navigation}/>
+        <ItemRender item={item} key={item.id}  navigation={navigation}/>
        ))}
 </ScrollView>
 <TouchableOpacity

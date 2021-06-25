@@ -8,13 +8,13 @@ import Slider from "@react-native-community/slider";
 import { textos, color } from "../../../constants";
 import axios from 'axios';
 import { ScrollView } from "react-native-gesture-handler";
+import api from "../../../api";
 
 const Debarkation = ({ navigation, route }) => {
   const url = 'http://192.168.1.106:3005';
  const [infosTrip,setInfoTrip] = useState();
 
 
- const [id,setId] = useState();
  const dadosViagem = route.params;
  console.log(dadosViagem.id);
 
@@ -26,7 +26,7 @@ const Debarkation = ({ navigation, route }) => {
   useFocusEffect(
     React.useCallback(() => {
       async function viagens(){
-        const {data} = await axios.get(url+`/trip/${dadosViagem.id}/listPassenger`);
+        const {data} = await api.get(`/trip/${dadosViagem.id}/listPassenger`);
         
         setData(data);
          console.log(data);
@@ -67,7 +67,7 @@ const Debarkation = ({ navigation, route }) => {
 
         {data.map((item)=>(
 
-         <TouchableOpacity >
+         <TouchableOpacity key={item.id} >
          <View style={styles.cardView}>
            <Text style={styles.cardText} numberOfLines={1}>
              {infosTrip}

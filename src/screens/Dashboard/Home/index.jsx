@@ -11,14 +11,14 @@ import styles from "./styles";
 import { useState } from "react";
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
+import api from '../../../api'
 
 const Home = ({ navigation }) => {
  const [data,setData] = useState({});
- const url = 'http://192.168.1.106:3005';
  useFocusEffect(
   React.useCallback(() => {
     async function viagens(){
-      const response = await axios.get(url+'/trip/lista');
+      const response = await api.get('/trip/lista');
       setData(response.data);
       console.log(data);
     }

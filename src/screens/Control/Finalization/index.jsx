@@ -4,10 +4,10 @@ import styles from "./styles";
 import { textos, color } from "../../../constants";
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
+import api from "../../../api";
 
 
 const Finalization = ({ navigation,route }) => {
-  const url = 'http://192.168.1.106:3005';
 
  const dadosViagem = route.params;
  console.log(dadosViagem.id)
@@ -15,7 +15,7 @@ const Finalization = ({ navigation,route }) => {
   useFocusEffect(
     React.useCallback(() => {
       async function finalization(){
-        const response = await axios.get(url+`/trip/${dadosViagem.id}/finalization`);
+        const response = await api.get(`/trip/${dadosViagem.id}/2/finalization`);
         
       }
       finalization();
