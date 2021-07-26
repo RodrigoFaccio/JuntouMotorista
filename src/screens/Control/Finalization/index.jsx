@@ -15,7 +15,11 @@ const Finalization = ({ navigation,route }) => {
   useFocusEffect(
     React.useCallback(() => {
       async function finalization(){
+        console.log('=-----=')
+
         const response = await api.get(`/trip/${dadosViagem.id}/2/finalization`);
+
+        console.log(dadosViagem)
         
       }
       finalization();

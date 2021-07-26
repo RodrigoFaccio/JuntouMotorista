@@ -4,6 +4,8 @@ import { color } from "../constants/colors";
 
 
 import Login from '../screens/Login';
+import Register from '../screens/Register';
+
 
 const Auth = createStackNavigator();
 
@@ -14,6 +16,8 @@ const AuthRoutes = ()=>{
             backgroundColor: color.button,
           }}>
             <Auth.Screen name="Login" component={Login}/>
+            <Auth.Screen name="Register" component={Register}/>
+
         </Auth.Navigator>
     );
 }
